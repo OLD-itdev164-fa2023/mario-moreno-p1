@@ -9,6 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
             title
             slug
             id
+            category
           }
         }
       }
@@ -19,8 +20,10 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/product/${edge.node.slug}`,
       component: require.resolve("./src/templates/SingleProduct.js"),
       context: {
-        slug: edge.node.slug,
+        id: edge.node.id,
+        category: edge.node.category,
       },
+      defer: true,
     })
   })
 
