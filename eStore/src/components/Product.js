@@ -5,9 +5,9 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 function Product({ edge }) {
   return (
-    <div className="product-container">
-      <Link to={`/product/${edge.node.slug}`}>
-        <div>
+    <div className="flex w-[300px] m-5 sm:mx-2 justify-center items-start text-center bg-white border-2 border-gray-300	p-4">
+      <Link to={`/product/${edge.node.slug}`} className="no-underline">
+        <div className=" flex h-[230px] justify-center items-center ">
           <GatsbyImage
             image={edge.node.image.gatsbyImageData}
             alt={edge.node.title}

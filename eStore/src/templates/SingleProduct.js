@@ -5,8 +5,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Product from "../components/product"
 
-function SingleProduct({ data, pageContext }) {
-  console.log(data)
+function SingleProduct({ data }) {
   return (
     <Layout>
       <div className="container">
@@ -28,9 +27,11 @@ function SingleProduct({ data, pageContext }) {
       </div>
       <div>
         <h2>Related Products</h2>
-        {data.allContentfulProduct.edges.map(edge => {
-          return <Product edge={edge} key={edge.node.id} />
-        })}
+        <div className="flex flex-wrap justify-center justify-items-start mt-5 content-start">
+          {data.allContentfulProduct.edges.map(edge => {
+            return <Product edge={edge} key={edge.node.id} />
+          })}
+        </div>
       </div>
     </Layout>
   )
