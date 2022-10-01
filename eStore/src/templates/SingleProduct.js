@@ -8,26 +8,32 @@ import Product from "../components/product"
 function SingleProduct({ data }) {
   return (
     <Layout>
-      <div className="container">
-        <div className="image-container">
+      <div className="flex flex-wrap justify-center min-h-[400px] items-center px-0 bg-slate-100">
+        <div className="">
           <GatsbyImage
             image={data.contentfulProduct.image.gatsbyImageData}
             alt={data.contentfulProduct.title}
           />
         </div>
-        <div>
-          <h3>{data.contentfulProduct.title}</h3>
-          <h3>${data.contentfulProduct.price}</h3>
-          <p>{data.contentfulProduct.description.description}</p>
-        </div>
-        <div>
-          <h5>Rating: {data.contentfulProduct.rating.rate}</h5>
-          <h5>Likes: {data.contentfulProduct.rating.count}</h5>
+        <div className="p-5">
+          <div className="">
+            <h3>{data.contentfulProduct.title}</h3>
+            <h3>${data.contentfulProduct.price}</h3>
+            <p>{data.contentfulProduct.description.description}</p>
+          </div>
+          <div className="flex ">
+            <h5 className="mr-5">
+              Rating: {data.contentfulProduct.rating.rate}
+            </h5>
+            <h5>Likes: {data.contentfulProduct.rating.count}</h5>
+          </div>
         </div>
       </div>
       <div>
-        <h2>Related Products</h2>
-        <div className="flex flex-wrap justify-center justify-items-start mt-5 content-start">
+        <div className="flex justify-center py-5 mt-3">
+          <h1 className="mb-0 text-4xl">Related Products</h1>
+        </div>
+        <div className="flex flex-wrap justify-center justify-items-start content-start">
           {data.allContentfulProduct.edges.map(edge => {
             return <Product edge={edge} key={edge.node.id} />
           })}
@@ -57,7 +63,7 @@ export const query = graphql`
         gatsbyImageData(
           layout: CONSTRAINED
           placeholder: TRACED_SVG
-          width: 300
+          height: 300
         )
       }
     }
@@ -77,7 +83,7 @@ export const query = graphql`
             gatsbyImageData(
               layout: CONSTRAINED
               placeholder: TRACED_SVG
-              width: 150
+              height: 200
             )
           }
         }

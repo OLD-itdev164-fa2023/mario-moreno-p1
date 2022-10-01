@@ -34,7 +34,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <Seo title="Home" />
-      <div className="flex flex-wrap justify-center justify-items-start mt-5 content-start">
+      <div className="flex flex-wrap justify-center mt-5 content-start">
         {data.allContentfulProduct.edges.map(edge => {
           return <Product edge={edge} key={edge.node.id} />
         })}
