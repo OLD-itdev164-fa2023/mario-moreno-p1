@@ -34,9 +34,11 @@ function SingleProduct({ data }) {
           <h1 className="mb-0 text-4xl">Related Products</h1>
         </div>
         <div className="flex flex-wrap justify-center justify-items-start content-start">
-          {data.allContentfulProduct.edges.map(edge => {
-            return <Product edge={edge} key={edge.node.id} />
-          })}
+          {data.allContentfulProduct.edges
+            .filter(edge => edge.node.id !== data.contentfulProduct.id)
+            .map(edge => {
+              return <Product edge={edge} key={edge.node.id} />
+            })}
         </div>
       </div>
     </Layout>
