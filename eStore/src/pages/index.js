@@ -15,6 +15,7 @@ const IndexPage = () => {
             title
             price
             slug
+            category
             rating {
               rate
               count
@@ -31,10 +32,15 @@ const IndexPage = () => {
       }
     }
   `)
+
+  data.allContentfulProduct.edges.map(edge => {
+    return console.log(edge.node.category)
+  })
+
   return (
     <Layout>
       <Seo title="Home" />
-      <div className="flex flex-wrap justify-center mt-5 content-start">
+      <div className="flex flex-wrap justify-center mt-5 content-start gap-5">
         {data.allContentfulProduct.edges.map(edge => {
           return <Product edge={edge} key={edge.node.id} />
         })}

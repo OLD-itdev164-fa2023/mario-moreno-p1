@@ -17,9 +17,15 @@ function SingleProduct({ data }) {
         </div>
         <div className="p-5">
           <div className="">
-            <h3>{data.contentfulProduct.title}</h3>
-            <h3>${data.contentfulProduct.price}</h3>
-            <p>{data.contentfulProduct.description.description}</p>
+            <h3 className="text-2xl text-black">
+              {data.contentfulProduct.title}
+            </h3>
+            <h3 className="text-lg text-amber-600 font-bold">
+              ${data.contentfulProduct.price}
+            </h3>
+            <p className="mt-5">
+              {data.contentfulProduct.description.description}
+            </p>
           </div>
           <div className="flex ">
             <h5 className="mr-5">
@@ -33,7 +39,7 @@ function SingleProduct({ data }) {
         <div className="flex justify-center py-5 mt-3">
           <h1 className="mb-0 text-4xl">Related Products</h1>
         </div>
-        <div className="flex flex-wrap justify-center justify-items-start content-start">
+        <div className="flex flex-wrap justify-center justify-items-start content-start gap-5">
           {data.allContentfulProduct.edges
             .filter(edge => edge.node.id !== data.contentfulProduct.id)
             .map(edge => {

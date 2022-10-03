@@ -28,14 +28,8 @@ const Layout = ({ children }) => {
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div>
         <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `var(--space-5)`,
-            fontSize: `var(--font-sm)`,
-          }}
-        >
-          © {new Date().getFullYear()} &middot; Built with
-          {` `}
+        <footer className="flex mt-5 text-sm justify-center p-5">
+          © {new Date().getFullYear()} &middot; Built with &nbsp;
           <a href="https://www.gatsbyjs.com">Gatsby</a>
         </footer>
       </div>
