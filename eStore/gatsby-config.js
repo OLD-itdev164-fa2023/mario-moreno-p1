@@ -11,6 +11,7 @@ module.exports = {
     },
   },
   plugins: [
+    "gatsby-plugin-postcss",
     {
       resolve: `gatsby-source-contentful`,
       options: {

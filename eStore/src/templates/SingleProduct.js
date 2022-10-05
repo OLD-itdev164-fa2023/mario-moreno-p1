@@ -5,38 +5,51 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Product from "../components/product"
 
-function SingleProduct({ data, pageContext }) {
-  console.log(data)
+function SingleProduct({ data }) {
   return (
     <Layout>
-      <div className="container">
-        <div className="image-container">
+      <div className="flex flex-wrap justify-center min-h-[400px] items-center px-0 bg-slate-200">
+        <div className="">
           <GatsbyImage
             image={data.contentfulProduct.image.gatsbyImageData}
             alt={data.contentfulProduct.title}
           />
         </div>
-        <div>
-          <h3>{data.contentfulProduct.title}</h3>
-          <h3>${data.contentfulProduct.price}</h3>
-          <p>{data.contentfulProduct.description.description}</p>
-        </div>
-        <div>
-          <h5>Rating: {data.contentfulProduct.rating.rate}</h5>
-          <h5>Likes: {data.contentfulProduct.rating.count}</h5>
+        <div className="p-5">
+          <div className="">
+            <h3 className="text-2xl text-black">
+              {data.contentfulProduct.title}
+            </h3>
+            <h3 className="text-lg text-amber-600 font-bold">
+              ${data.contentfulProduct.price}
+            </h3>
+            <p className="mt-5">
+              {data.contentfulProduct.description.description}
+            </p>
+          </div>
+          <div className="flex ">
+            <h5 className="mr-5">
+              Rating: {data.contentfulProduct.rating.rate}
+            </h5>
+            <h5>Likes: {data.contentfulProduct.rating.count}</h5>
+          </div>
         </div>
       </div>
       <div>
-        <h2>Related Products</h2>
-        {data.allContentfulProduct.edges.map(edge => {
-          return <Product edge={edge} key={edge.node.id} />
-        })}
+        <div className="flex justify-center py-5 mt-3">
+          <h1 className="mb-0 text-4xl">Related Products</h1>
+        </div>
+        <div className="flex flex-wrap justify-center justify-items-start content-start gap-5 pb-8">
+          {data.allContentfulProduct.edges
+            .filter(edge => edge.node.id !== data.contentfulProduct.id)
+            .map(edge => {
+              return <Product edge={edge} key={edge.node.id} />
+            })}
+        </div>
       </div>
     </Layout>
   )
 }
-
-export default SingleProduct
 
 export const query = graphql`
   query ($id: String, $category: String) {
@@ -56,7 +69,7 @@ export const query = graphql`
         gatsbyImageData(
           layout: CONSTRAINED
           placeholder: TRACED_SVG
-          width: 300
+          height: 300
         )
       }
     }
@@ -76,7 +89,7 @@ export const query = graphql`
             gatsbyImageData(
               layout: CONSTRAINED
               placeholder: TRACED_SVG
-              width: 150
+              height: 200
             )
           }
         }
@@ -84,3 +97,4 @@ export const query = graphql`
     }
   }
 `
+export default SingleProduct
