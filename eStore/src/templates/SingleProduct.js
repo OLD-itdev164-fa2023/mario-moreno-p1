@@ -8,7 +8,7 @@ import Product from "../components/product"
 function SingleProduct({ data }) {
   return (
     <Layout>
-      <div className="flex flex-wrap justify-center min-h-[400px] items-center px-0 bg-slate-100">
+      <div className="flex flex-wrap justify-center min-h-[400px] items-center px-0 bg-slate-200">
         <div className="">
           <GatsbyImage
             image={data.contentfulProduct.image.gatsbyImageData}
@@ -39,7 +39,7 @@ function SingleProduct({ data }) {
         <div className="flex justify-center py-5 mt-3">
           <h1 className="mb-0 text-4xl">Related Products</h1>
         </div>
-        <div className="flex flex-wrap justify-center justify-items-start content-start gap-5">
+        <div className="flex flex-wrap justify-center justify-items-start content-start gap-5 pb-8">
           {data.allContentfulProduct.edges
             .filter(edge => edge.node.id !== data.contentfulProduct.id)
             .map(edge => {
@@ -50,8 +50,6 @@ function SingleProduct({ data }) {
     </Layout>
   )
 }
-
-export default SingleProduct
 
 export const query = graphql`
   query ($id: String, $category: String) {
@@ -99,3 +97,4 @@ export const query = graphql`
     }
   }
 `
+export default SingleProduct

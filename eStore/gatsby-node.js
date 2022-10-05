@@ -1,3 +1,4 @@
+var slugify = require("slugify")
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
@@ -15,6 +16,18 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
+  result.data.allContentfulProduct.edges.forEach(edge => {
+    createPage({
+      path: `/categories/${slugify(edge.node.category, { lower: true })}`,
+      component: require.resolve("./src/templates/CategoryPage.js"),
+      context: {
+        id: edge.node.id,
+        category: edge.node.category,
+      },
+      defer: true,
+    })
+  })
+
   result.data.allContentfulProduct.edges.forEach(edge => {
     createPage({
       path: `/product/${edge.node.slug}`,

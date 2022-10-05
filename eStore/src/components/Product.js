@@ -5,7 +5,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 function Product({ edge }) {
   return (
-    <div className="flex w-[300px] justify-center items-start text-center bg-white border-2 border-gray-300	p-4">
+    <div className="flex w-[300px] justify-center items-start text-center bg-white border-2 border-gray-300	p-4 rounded-md shadow-md ">
       <Link
         to={`/product/${edge.node.slug}`}
         className="no-underline text-gray-500	"
