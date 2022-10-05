@@ -14,7 +14,7 @@ const IndexPage = ({ data }) => {
     <Layout>
       <Seo title="Home" />
       <div className="container flex mx-auto">
-        <div className="flex flex-col w-1/3 mt-5 py-5 px-4 mr-5">
+        <div className="flex flex-col w-1/4 mt-5 py-5 px-4 mr-5">
           <h1 className="text-2xl mb-4">Categories</h1>
           <div className="flex flex-col">
             <Link
@@ -35,7 +35,7 @@ const IndexPage = ({ data }) => {
             })}
           </div>
         </div>
-        <div className="flex flex-wrap justify-start py-8 content-start gap-5">
+        <div className="container flex flex-wrap justify-start py-8 content-start gap-5">
           {products.map(edge => {
             return <Product edge={edge} key={edge.node.id} />
           })}

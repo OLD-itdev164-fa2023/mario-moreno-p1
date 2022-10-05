@@ -7,15 +7,14 @@ import slugify from "slugify"
 
 import getCategories from "../components/utils/getCategories"
 
-const CategoryPage = ({ data }) => {
+const CategoryPage = ({ data, pageContext }) => {
   const categories = getCategories(data.allContentfulProduct.edges)
-  const items = data.allContentfulProduct.edges
 
   return (
     <Layout>
       <Seo title="Home" />
       <div className="container flex mx-auto">
-        <div className="flex flex-col w-1/3 mt-5 py-5 px-4">
+        <div className="flex flex-col w-1/4 mt-5 py-5 px-4">
           <h1 className="text-2xl mb-4">Categories</h1>
           <div className="flex flex-col">
             <Link to="/" className="mb-2 no-underline text-black">
@@ -33,10 +32,12 @@ const CategoryPage = ({ data }) => {
             })}
           </div>
         </div>
-        <div className="flex flex-wrap justify-start py-8 content-start gap-5">
-          {items.map(edge => {
-            return <Product edge={edge} key={edge.node.id} />
-          })}
+        <div className="container flex flex-wrap justify-start py-8 content-start gap-5">
+          {data.allContentfulProduct.edges
+            .filter(edge => edge.node.category === pageContext.category)
+            .map(edge => {
+              return <Product edge={edge} key={edge.node.id} />
+            })}
         </div>
       </div>
     </Layout>
@@ -45,8 +46,8 @@ const CategoryPage = ({ data }) => {
 export const Head = () => <Seo title="Home" />
 
 export const query = graphql`
-  query ($category: String) {
-    allContentfulProduct(filter: { category: { eq: $category } }) {
+  {
+    allContentfulProduct {
       edges {
         node {
           id
